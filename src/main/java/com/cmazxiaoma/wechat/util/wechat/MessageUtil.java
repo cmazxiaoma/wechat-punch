@@ -1,13 +1,7 @@
 package com.cmazxiaoma.wechat.util.wechat;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.cmazxiaoma.wechat.VO.WechatUserListVO;
 import com.cmazxiaoma.wechat.dto.*;
-import com.cmazxiaoma.wechat.VO.WechatQRTicketVO;
-import com.cmazxiaoma.wechat.constant.WechatConfig;
 import com.cmazxiaoma.wechat.constant.WechatMessage;
-import com.cmazxiaoma.wechat.http.HttpAPIService;
 import com.thoughtworks.xstream.XStream;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Document;

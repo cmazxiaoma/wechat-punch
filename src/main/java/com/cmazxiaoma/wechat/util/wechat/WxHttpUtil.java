@@ -1,41 +1,30 @@
 package com.cmazxiaoma.wechat.util.wechat;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.cmazxiaoma.wechat.VO.WechatQRTicketVO;
-import com.cmazxiaoma.wechat.VO.WechatUserListVO;
+import com.cmazxiaoma.wechat.VO.WxQRTicketVO;
+import com.cmazxiaoma.wechat.VO.WxUserListVO;
 import com.cmazxiaoma.wechat.constant.WechatConfig;
 import com.cmazxiaoma.wechat.core.AccessTokenCache;
-import com.cmazxiaoma.wechat.exception.AccessTokenExpiredException;
 import com.cmazxiaoma.wechat.http.HttpAPIService;
 import com.cmazxiaoma.wechat.http.HttpResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 
 @Slf4j
-public class WechatHttpUtil {
+public class WxHttpUtil {
 
     private HttpAPIService httpAPIService;
 
-    private WechatHttpUtil() {
+    private WxHttpUtil() {
         httpAPIService = SpringContextUtil.getBean(HttpAPIService.class);
     }
 
-    public static WechatHttpUtil getInstance() {
+    public static WxHttpUtil getInstance() {
         return WechatHttpUtilHolder.wechatHttpUtil;
     }
 
     private static class WechatHttpUtilHolder {
-        private static final WechatHttpUtil wechatHttpUtil = new WechatHttpUtil();
+        private static final WxHttpUtil wechatHttpUtil = new WxHttpUtil();
     }
 
     //回复a，查询该公众号关注者列表
@@ -57,7 +46,7 @@ public class WechatHttpUtil {
         String url = "https://api.weixin.qq.com/cgi-bin/user/get?access_token="
                 + AccessTokenCache.get();
         content = httpAPIService.doGet(url).getBody();
-        WechatUserListVO userListVO = JSON.parseObject(content, new TypeReference<WechatUserListVO>(){});
+        WxUserListVO userListVO = JSON.parseObject(content, new TypeReference<WxUserListVO>(){});
         log.info("userListVO = {}", userListVO);
 
         return userListVO.toString();
@@ -88,7 +77,7 @@ public class WechatHttpUtil {
 
     //获取QRCode图片MediaId
     public String getQRCodeMediaId() {
-        return WechatFileUtil.upload(WechatConfig.QRCode, "image");
+        return WxFileUtil.upload(WechatConfig.QRCode, "image");
     }
 
     //实时获取QRCode图片
@@ -109,7 +98,7 @@ public class WechatHttpUtil {
 
         } while ("42001".equalsIgnoreCase(errcode));
 
-        WechatQRTicketVO wechatQRTicketVO = JSON.parseObject(content, new TypeReference<WechatQRTicketVO>(){});
+        WxQRTicketVO wechatQRTicketVO = JSON.parseObject(content, new TypeReference<WxQRTicketVO>(){});
         String QRCodeUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="
                 + wechatQRTicketVO.getTicket();
         log.info("QRCodeUrl = {}", QRCodeUrl);

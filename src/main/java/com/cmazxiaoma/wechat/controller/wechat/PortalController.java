@@ -4,9 +4,9 @@ import com.cmazxiaoma.wechat.core.BaseController;
 import com.cmazxiaoma.wechat.dto.LocationMessage;
 import com.cmazxiaoma.wechat.http.HttpAPIService;
 import com.cmazxiaoma.wechat.util.wechat.MessageUtil;
-import com.cmazxiaoma.wechat.util.wechat.WechatCheckUtil;
+import com.cmazxiaoma.wechat.util.wechat.WxCheckUtil;
 import com.cmazxiaoma.wechat.constant.WechatMessage;
-import com.cmazxiaoma.wechat.util.wechat.WechatHttpUtil;
+import com.cmazxiaoma.wechat.util.wechat.WxHttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/wechat")
@@ -50,7 +49,7 @@ public class PortalController extends BaseController {
         log.info("nonce = {}", nonce);
         log.info("echostr = {}", echostr);
 
-        response.getWriter().print(WechatCheckUtil.checkSignature(signature, timestamp, nonce) ? echostr : null);
+        response.getWriter().print(WxCheckUtil.checkSignature(signature, timestamp, nonce) ? echostr : null);
     }
 
     @PostMapping("/portal")
@@ -90,17 +89,17 @@ public class PortalController extends BaseController {
 
             //发送该公众号的关注者列表
             if (content.equalsIgnoreCase("a")) {
-                message = MessageUtil.initTextMessage(fromUserName, toUserName, WechatHttpUtil.getInstance().queryWechatUserList());
+                message = MessageUtil.initTextMessage(fromUserName, toUserName, WxHttpUtil.getInstance().queryWechatUserList());
             }
 
             //发送当前用户的基础信息
             if (content.equalsIgnoreCase("b")) {
-                message = MessageUtil.initTextMessage(fromUserName, toUserName, WechatHttpUtil.getInstance().queryCurrentUserInfo(userOpenId));
+                message = MessageUtil.initTextMessage(fromUserName, toUserName, WxHttpUtil.getInstance().queryCurrentUserInfo(userOpenId));
             }
 
             //发送公众号的二维码
             if (content.equalsIgnoreCase("c")) {
-                message = MessageUtil.initImageMessage(fromUserName, toUserName, WechatHttpUtil.getInstance().getQRCodeMediaId());
+                message = MessageUtil.initImageMessage(fromUserName, toUserName, WxHttpUtil.getInstance().getQRCodeMediaId());
             }
 
             //发送单图文消息
@@ -115,7 +114,7 @@ public class PortalController extends BaseController {
 
             //发送公众号的二维码url
             if (content.equalsIgnoreCase("f")) {
-                message = MessageUtil.initTextMessage(fromUserName, toUserName, WechatHttpUtil.getInstance().getQRCodeUrl());
+                message = MessageUtil.initTextMessage(fromUserName, toUserName, WxHttpUtil.getInstance().getQRCodeUrl());
             }
 
         }

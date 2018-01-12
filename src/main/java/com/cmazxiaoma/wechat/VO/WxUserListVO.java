@@ -9,7 +9,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class WechatUserListVO {
+public class WxUserListVO {
 
     /**
      * total : 2

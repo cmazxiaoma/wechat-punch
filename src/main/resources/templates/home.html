@@ -3,8 +3,87 @@
     <head>
         <meta charset="UTF-8" />
         <title>index</title>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" />
+        <script>
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wxa6da5d0767baf377', // 必填，公众号的唯一标识
+                timestamp: '20141012', // 必填，生成签名的时间戳
+                nonceStr: 'cmazxiaoma', // 必填，生成签名的随机串
+                signature: 'bcd38c79d72bb9bec87e1e728b46c21ecb0afb03',// 必填，签名，见附录1
+                jsApiList: [
+                    'checkJsApi',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareWeibo',
+                    'onMenuShareQZone',
+                    'hideMenuItems',
+                    'showMenuItems',
+                    'hideAllNonBaseMenuItem',
+                    'showAllNonBaseMenuItem',
+                    'translateVoice',
+                    'startRecord',
+                    'stopRecord',
+                    'onVoiceRecordEnd',
+                    'playVoice',
+                    'onVoicePlayEnd',
+                    'pauseVoice',
+                    'stopVoice',
+                    'uploadVoice',
+                    'downloadVoice',
+                    'chooseImage',
+                    'previewImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'getNetworkType',
+                    'openLocation',
+                    'getLocation',
+                    'hideOptionMenu',
+                    'showOptionMenu',
+                    'closeWindow',
+                    'scanQRCode',
+                    'chooseWXPay',
+                    'openProductSpecificView',
+                    'addCard',
+                    'chooseCard',
+                    'openCard'
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+
+            wx.ready(function(){
+
+                //获取地理位置
+                wx.getLocation({
+                    type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                    success: function (res) {
+                        var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                        var speed = res.speed; // 速度，以米/每秒计
+                        var accuracy = res.accuracy; // 位置精度
+                        alert("latitude=" + latitude + "longitude=" + speed + "speed=" + speed + "accuracy=" + accuracy);
+
+                        wx.openLocation({
+                            latitude: latitude, // 纬度，浮点数，范围为90 ~ -90
+                            longitude: longitude, // 经度，浮点数，范围为180 ~ -180。
+                            name: '小马打卡', // 位置名
+                            address: '恒峰', // 地址详情说明
+                            scale: '28', // 地图缩放级别,整形值,范围从1~28。默认为最大
+                            infoUrl: 'http://203.195.235.76/jssdk/#menu-share' // 在查看位置界面底部显示的超链接,可点击跳转
+                        });
+                    }
+                });
+            });
+
+            wx.error(function(res){
+                // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                alert(res.toString());
+            });
+
+        </script>
     </head>
-    <body style="font-size:60px; text-align: center;">
+    <body style="font-size:30px; text-align: center;">
         <a href="wxauth/pclogin">开放平台授权登录</a>
         <br />
         <br />

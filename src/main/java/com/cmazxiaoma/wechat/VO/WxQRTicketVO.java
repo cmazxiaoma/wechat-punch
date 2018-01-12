@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.DeclareAnnotation;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class WechatQRTicketVO {
+public class WxQRTicketVO {
 
     /**
      * ticket : gQHE8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyWmhCZDVIZnpjOTQxMDAwMHcwM2sAAgQT2FVaAwQAAAAA

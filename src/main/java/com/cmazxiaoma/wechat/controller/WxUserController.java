@@ -1,7 +1,7 @@
 package com.cmazxiaoma.wechat.controller;
 
 import com.cmazxiaoma.wechat.core.ResultVO;
-import com.cmazxiaoma.wechat.core.ResultGenerator;
+import com.cmazxiaoma.wechat.core.ResultVOGenerator;
 import com.cmazxiaoma.wechat.model.WxUser;
 import com.cmazxiaoma.wechat.service.WxUserService;
 import com.github.pagehelper.PageHelper;
@@ -23,25 +23,25 @@ public class WxUserController{
     @PostMapping("/add")
     public ResultVO add(@RequestBody WxUser wxUser) {
         wxUserService.save(wxUser);
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/delete/{id}")
     public ResultVO delete(@PathVariable Integer id) {
         wxUserService.deleteById(id);
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @PutMapping("/update")
     public ResultVO update(@RequestBody WxUser wxUser) {
         wxUserService.update(wxUser);
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @GetMapping("/detail/{id}")
     public ResultVO detail(@PathVariable Integer id) {
         WxUser wxUser = wxUserService.findById(id);
-        return ResultGenerator.genSuccessResult(wxUser);
+        return ResultVOGenerator.genSuccessResult(wxUser);
     }
 
     @GetMapping("/list")
@@ -49,6 +49,6 @@ public class WxUserController{
         PageHelper.startPage(page, size);
         List<WxUser> list = wxUserService.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultVOGenerator.genSuccessResult(pageInfo);
     }
 }

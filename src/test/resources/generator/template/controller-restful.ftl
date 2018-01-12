@@ -1,7 +1,7 @@
 package ${basePackage}.controller;
 
 import ${basePackage}.core.ResultVO;
-import ${basePackage}.core.ResultGenerator;
+import ${basePackage}.core.ResultVOGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
@@ -23,25 +23,25 @@ public class ${modelNameUpperCamel}Controller{
     @PostMapping("/add")
     public ResultVO add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.save(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @DeleteMapping("/delete/{id}")
     public ResultVO delete(@PathVariable Integer id) {
         ${modelNameLowerCamel}Service.deleteById(id);
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @PutMapping("/update")
     public ResultVO update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult();
+        return ResultVOGenerator.genSuccessResult();
     }
 
     @GetMapping("/detail/{id}")
     public ResultVO detail(@PathVariable Integer id) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+        return ResultVOGenerator.genSuccessResult(${modelNameLowerCamel});
     }
 
     @GetMapping("/list")
@@ -49,6 +49,6 @@ public class ${modelNameUpperCamel}Controller{
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
         PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        return ResultVOGenerator.genSuccessResult(pageInfo);
     }
 }

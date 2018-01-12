@@ -3,7 +3,7 @@ package com.cmazxiaoma.wechat.core;
 /**
  * 响应结果生成工具
  */
-public class ResultGenerator {
+public class ResultVOGenerator {
 
     public static ResultVO genSuccessResult() {
         return new ResultVO.Builder()

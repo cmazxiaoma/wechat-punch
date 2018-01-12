@@ -3,7 +3,7 @@ package com.cmazxiaoma.wechat.util.wechat;
 import java.security.MessageDigest;
 import java.util.Arrays;
 
-public class WechatCheckUtil {
+public class WxCheckUtil {
     private static final String token = "cmazxiaoma";
 
     public static boolean checkSignature(String signature, String timestamp, String nonce) {
