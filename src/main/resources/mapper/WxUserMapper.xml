@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmazxiaoma.wechat.dao.WxUserMapper">
+  <resultMap id="BaseResultMap" type="com.cmazxiaoma.wechat.model.WxUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="TINYINT" property="id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="privilege" jdbcType="VARCHAR" property="privilege" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+</mapper>
