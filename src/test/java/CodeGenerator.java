@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.cmazxiaoma.wechat.core.ProjectConstant.*;
+import static com.cmazxiaoma.wx.core.ProjectConstant.*;
 
 /**
  * 代码生成器，根据数据表名称生成对应的Model、Mapper、Service、Controller简化开发。
@@ -38,7 +38,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());//@date
 
     public static void main(String[] args) {
-        genCode("wx_user_role");
+        genCode("wx_user_time_sheet");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
     }
 

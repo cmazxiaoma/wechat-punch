@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>wx_authorized_result</title>
+    </head>
+    <body style="font-size:30px;">
+            <div>authorized successfully!</div>
+            <div>
+                nickname=<span th:text="${userInfo.nickname}" />
+            </div>
+            <div>
+                headimgurl=<span th:text="${userInfo.headimgurl}" />
+            </div>
+            <img th:src="${userInfo.headimgurl}" style="width:132px; hegiht:132px" />
+            <a th:href="${userInfo.headimgurl}" >headimgurl</a>
+    </body>
+</html>

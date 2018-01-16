@@ -59,11 +59,11 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.cmazxiaoma.wechat" level="INFO" />
+    <logger name="com.cmazxiaoma.wx" level="INFO" />
 
     <logger name="org.springframework.security" level="INFO" />
 
-    <logger name="com.cmazxiaoma.wechat.dao" level="DEBUG" />
+    <logger name="com.cmazxiaoma.wx.dao" level="DEBUG" />
 
     <logger name="org.mybatis">
         <level value="TRACE"/>

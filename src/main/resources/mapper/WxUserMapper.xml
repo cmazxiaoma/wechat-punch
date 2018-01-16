@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cmazxiaoma.wechat.dao.WxUserMapper">
-  <resultMap id="BaseResultMap" type="com.cmazxiaoma.wechat.model.WxUser">
+<mapper namespace="com.cmazxiaoma.wx.dao.WxUserMapper">
+  <resultMap id="BaseResultMap" type="com.cmazxiaoma.wx.model.WxUser">
     <!--
       WARNING - @mbg.generated
     -->
