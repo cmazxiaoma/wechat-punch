@@ -90,7 +90,7 @@ public class MySessionInformationExpiredStrategy implements InvalidSessionStrate
         httpServletResponse.setContentType("application/json;charset=utf-8");
         PrintWriter out = httpServletResponse.getWriter();
 
-        out.write(JSON.toJSONString(ResultVOGenerator.genCustomResult(ResultCode.INVALID_SESSION)));
+        out.write(JSON.toJSONString(ResultVOGenerator.genCustomResult(ResultCode.ACCOUNT_LOGIN_ELSEWHERE)));
         out.flush();
         out.close();
     }

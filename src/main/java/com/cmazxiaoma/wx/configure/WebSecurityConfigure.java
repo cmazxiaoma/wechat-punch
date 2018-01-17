@@ -9,6 +9,7 @@ import com.cmazxiaoma.wx.service.*;
 import com.cmazxiaoma.wx.util.MD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
@@ -102,7 +103,6 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 return encodedPassword.equals(MD5Util.encode((String) charSequence));
             }
         });
-
         //注入事件发布者
         auth.authenticationEventPublisher(authenticationEventPublisher());
 
@@ -181,9 +181,9 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 //                    }
 //                })
                 .and().logout()
+                .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
-                .deleteCookies("JSESSIONID")
                 .permitAll()
                 .and().addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class)
                 //配置未授权处理的handler
