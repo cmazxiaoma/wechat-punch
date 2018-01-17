@@ -1,5 +1,7 @@
 package com.cmazxiaoma.wx.core;
 
+import org.omg.CORBA.UNKNOWN;
+
 /**
  * 响应码枚举，参考HTTP状态码的语义
  */
@@ -23,11 +25,11 @@ public enum ResultCode {
     //拒接访问
     FORBIDDEN(401, "您没有权限访问该资源"),
 
-    //用户名或密码输入错误，登录失败
-    USERNAME_PASSWORD_ERROR(1, "用户名或密码输入错误，登录失败"),
+    //账号错误
+    USERNAME_ERROR(1, "对不起，您的账号错误，请检查后再登陆！"),
 
     //账号被禁用，请联系管理员
-    ACCOUNT_CLOSED(2, "账号被禁用，请联系管理员"),
+    ACCOUNT_DISABLED(2, "账号被禁用，请联系管理员"),
 
     //登录失败
     LOGIN_FAILED(3, "登录失败"),
@@ -36,7 +38,20 @@ public enum ResultCode {
     ILLEGAL_PARAMETERS(4, "非法参数"),
 
     //查询无记录
-    QUERY_NO_DATA(5, "查询无信息");
+    QUERY_NO_DATA(5, "查询无信息"),
+
+    PASSWORD_ERROR(6, "对不起，您的密码错误，请检查后再登陆！"),
+
+    ACCOUNT_LOCAKED(7, "账号被锁定, 请联系管理员"),
+
+    //未知错误
+    UNKNOWN_ERROR(8, "未知错误"),
+
+    //Session失效
+    INVALID_SESSION(9, "session已失效"),
+
+    ACCOUNT_LOGIN_ELSEWHERE(10, "账号已在其他地方登录，被挤下线！");
+
 
     private Integer code;
 

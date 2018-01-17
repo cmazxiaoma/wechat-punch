@@ -58,11 +58,13 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         throw new AccessDeniedException("您没有该" + needRole + "权限");
     }
 
+    //表示当前AccessDecisionManager是否支持对应的ConfigAttribute
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
         return true;
     }
 
+    //表示当前AccessDecisionManager是否支持对应的受保护类型
     @Override
     public boolean supports(Class<?> aClass) {
         return true;

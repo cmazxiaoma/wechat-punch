@@ -27,7 +27,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a th:href="@{/}"> 首页 </a></li>
+                        <li><a th:href="@{/query_currentuser_info}"> 首页 </a></li>
 
                     </ul>
                 </div>
@@ -37,7 +37,10 @@
         <div class="container">
             <div class="starter-template">
                 <p th:if="${param.logout}" class="bg-warning">已成功注销</p>
-                <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
+                <p th:if="${param.error}" class="bg-danger">有错误，请重试 </p>
+                <p th:if="${session.SPRING_SECURITY_LAST_EXCEPTION}" class="bg-danger">
+                    <p th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" class="bg-danger"></p>
+                </p>
 
                 <h2>使用账号密码登录</h2>
 
