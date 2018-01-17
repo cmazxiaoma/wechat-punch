@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.session.ConcurrentSessionFilter;
@@ -103,6 +102,15 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 return encodedPassword.equals(MD5Util.encode((String) charSequence));
             }
         });
+
+        //注入事件发布者
+        auth.authenticationEventPublisher(authenticationEventPublisher());
+
+    }
+
+    @Bean
+    public AuthenticationEventPublisher authenticationEventPublisher() {
+        return new DefaultAuthenticationEventPublisher();
     }
 
     //定义那些url不需要被保护
@@ -127,7 +135,6 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 /*.antMatchers("/wx_home").access("hasAuthority('QUERY_ALL_USER_INFO')")*/
                 //任何请求，只有登录后才能访问
-
                 .anyRequest().authenticated()
                 //session并发管理，用户只能在一个终端登录
                 .and().sessionManagement().maximumSessions(1).sessionRegistry(sessionRegistry())
@@ -179,8 +186,8 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .permitAll()
                 .and().addFilterBefore(myFilterSecurityInterceptor, FilterSecurityInterceptor.class)
-                .exceptionHandling()
-                .accessDeniedHandler(myAuthenticationAccessDeniedHandler)
+                //配置未授权处理的handler
+                .exceptionHandling().accessDeniedHandler(myAuthenticationAccessDeniedHandler)
                 .and().httpBasic();
     }
 }
